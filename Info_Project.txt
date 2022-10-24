@@ -1,0 +1,9 @@
+PC-applicatie via GIS (geografisch info systeem)
+qt = library voor verschillende programmeertalen -> laat toe een GUI te maken
+(via python qthinker??? -> minder geavanceerd/professioneel)
+Openstreetmap gebruiken (vrij beschikbaar)
+API's bestuderen -> welke info kun je uit die kaarten halen?
+info detecteren die van belang is (automatisch)
+doel 1: hoeveel huizen tel je in bepaalde straal -> hoe stedelijk is de omgeving rond je als ergens staat
+doel 2: van A naar B -> hoe lang ben je dan in een bosomgeving, stadsomgeving etc... (via patchprocessing)
+(code rond OSV komt nog)
