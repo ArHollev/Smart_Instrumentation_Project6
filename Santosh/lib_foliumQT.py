@@ -1,6 +1,7 @@
 import io
 import sys
 
+
 import folium
 from folium.features import DivIcon
 from PySide6 import QtWidgets, QtWebEngineWidgets
