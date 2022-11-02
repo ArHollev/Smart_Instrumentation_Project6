@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9a5f3fb9-ff2a-43ba-95b2-0b6393a79b32" name="Changes" comment="random testejes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santosh/form.ui" beforeDir="false" afterPath="$PROJECT_DIR$/Santosh/form.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santosh/lib_foliumQT.py" beforeDir="false" afterPath="$PROJECT_DIR$/Santosh/lib_foliumQT.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santosh/lib_osmnx.py" beforeDir="false" afterPath="$PROJECT_DIR$/Santosh/lib_osmnx.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santosh/widget.py" beforeDir="false" afterPath="$PROJECT_DIR$/Santosh/widget.py" afterDir="false" />
-    </list>
+    <list default="true" id="9a5f3fb9-ff2a-43ba-95b2-0b6393a79b32" name="Changes" comment="random testejes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -221,6 +215,11 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="07ab6072-c243-476d-afe5-60d236b5f41b">
+          <value>
+            <State />
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State />
