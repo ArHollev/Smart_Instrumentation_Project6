@@ -1,26 +1,23 @@
+# This Python file uses the following encoding: utf-8
 import sys
-import os
-from PySide6.QtWidgets import QApplication
-from PySide6.QtUiTools import loadUiType
-
-current_dir = os.path.dirname(os.path.abspath(__file__))
-Form, Base = loadUiType(os.path.join(current_dir, "form.ui"))
+from PySide6.QtUiTools import QUiLoader
+from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtCore import QFile
 
 
-def clickedd():
-    print("Button clicked!!!!!!")
+class MyGUI(QMainWindow):
+    def __init__(self):
+        super(MyGUI, self).__init__()
+        loader = QUiLoader()
+        file = QFile("form.ui")
+        file.open(QFile.ReadOnly)
+        self.myWidget = loader.load(file, self)
+        self.show()
 
 
-class OCR(Base, Form):
-    def __init__(self, parent=None):
-        super(self.__class__, self).__init__(parent)
-        self.setupUi(self)
-        self.image = None
-        self.button.clicked.connect(lambda: clickedd())
 
 
-if __name__ == "__main__":
-    app = QApplication([])
-    widget = OCR()
-    widget.show()
-    sys.exit(app.exec_())
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    window = MyGUI()
+    app.exec()
