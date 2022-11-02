@@ -51,7 +51,7 @@
     <item row="5" column="1">
      <widget class="QPushButton" name="testbutton">
       <property name="text">
-       <string>TestValue</string>
+       <string>Gebied analyse</string>
       </property>
      </widget>
     </item>

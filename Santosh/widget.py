@@ -17,10 +17,10 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 Form, Base = loadUiType(os.path.join(current_dir, "form.ui"))
 
 
-def gebiedanalyse():
-    breedte, lengte = 51.2232747408709, 2.980362630411266  # ingeven breedte en lengte coordinaten
+def gebiedanalyse(breedte,lengte,straal):
+    #breedte, lengte, straal = 51.2232747408709, 2.980362630411266, 100  # ingeven breedte en lengte coordinaten
     result = ox.geometries_from_point((breedte, lengte), {"landuse": True},
-                                      dist=(100))  # command dat "landuse" gegevens ophaalt uit osm
+                                      dist=(straal))  # command dat "landuse" gegevens ophaalt uit osm
 
     # maken van lijst voor gebiedsanalye
     f = list()  # maken van een lijst van alle areas "landuse"
@@ -54,8 +54,6 @@ def gebiedanalyse():
     print("This area is a", grootste_gebied, "area")
 
 
-def clicked():
-    print("Button clicked!!!!!!")
 
 
 
@@ -63,9 +61,8 @@ class OCR(Base, Form):
     def __init__(self, parent=None):
         super(self.__class__, self).__init__(parent)
         self.setupUi(self)
-        # self.button.clicked.connect(lambda: clicked())
         self.button.clicked.connect(self.calculate)
-        self.testbutton.clicked.connect(lambda: gebiedanalyse())
+
         self.map(51.0557409, 3.7218855, 500)
 
         self.longitude.setText("51.0557409")
@@ -76,6 +73,8 @@ class OCR(Base, Form):
         self.slider_radius.setValue(500)
         self.radius.setText(str(self.slider_radius.value()))
         self.slider_radius.valueChanged.connect(lambda: self.radius.setText(str(self.slider_radius.value())))
+
+        self.testbutton.clicked.connect(lambda: gebiedanalyse(float(self.longitude.text()),float(self.latitude.text()),self.slider_radius.value()))
 
     def calculate(self):
         longitude = self.longitude.text()

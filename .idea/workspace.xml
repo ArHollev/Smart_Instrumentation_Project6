@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9a5f3fb9-ff2a-43ba-95b2-0b6393a79b32" name="Changes" comment="random testejes" />
+    <list default="true" id="9a5f3fb9-ff2a-43ba-95b2-0b6393a79b32" name="Changes" comment="gebied analyse">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santosh/form.ui" beforeDir="false" afterPath="$PROJECT_DIR$/Santosh/form.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santosh/widget.py" beforeDir="false" afterPath="$PROJECT_DIR$/Santosh/widget.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -199,7 +203,21 @@
       <option name="project" value="LOCAL" />
       <updated>1666785814277</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="gebied analyse">
+      <created>1667412830166</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1667412830166</updated>
+    </task>
+    <task id="LOCAL-00009" summary="gebied analyse">
+      <created>1667412913427</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1667412913427</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -230,6 +248,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="random testejes" />
-    <option name="LAST_COMMIT_MESSAGE" value="random testejes" />
+    <MESSAGE value="gebied analyse" />
+    <option name="LAST_COMMIT_MESSAGE" value="gebied analyse" />
   </component>
 </project>
