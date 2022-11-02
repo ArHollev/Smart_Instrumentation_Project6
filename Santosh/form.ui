@@ -9,20 +9,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>836</width>
-    <height>367</height>
+    <width>1280</width>
+    <height>720</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>836</width>
-    <height>367</height>
+    <width>1280</width>
+    <height>720</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>836</width>
-    <height>367</height>
+    <width>1280</width>
+    <height>720</height>
    </size>
   </property>
   <property name="cursor">
@@ -34,10 +34,10 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>520</x>
-     <y>70</y>
-     <width>266</width>
-     <height>158</height>
+     <x>740</x>
+     <y>10</y>
+     <width>501</width>
+     <height>211</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -45,6 +45,20 @@
      <widget class="QLineEdit" name="latitude">
       <property name="placeholderText">
        <string>type latitude</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QPushButton" name="testbutton">
+      <property name="text">
+       <string>TestValue</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="label_3">
+      <property name="text">
+       <string>radius</string>
       </property>
      </widget>
     </item>
@@ -62,28 +76,7 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="label_3">
-      <property name="text">
-       <string>radius</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="1">
-     <widget class="QPushButton" name="testbutton">
-      <property name="text">
-       <string>TestValue</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QLineEdit" name="radius">
-      <property name="placeholderText">
-       <string>type radius</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="0">
+    <item row="5" column="0">
      <widget class="QPushButton" name="button">
       <property name="enabled">
        <bool>true</bool>
@@ -100,38 +93,67 @@
       </property>
      </widget>
     </item>
-    <item row="3" column="1">
-     <widget class="QSlider" name="slider">
+    <item row="3" column="0">
+     <widget class="QSlider" name="slider_radius">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
      </widget>
     </item>
+    <item row="3" column="1">
+     <widget class="QLabel" name="radius">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
    </layout>
-  </widget>
-  <widget class="QLabel" name="result">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>320</y>
-     <width>391</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
   </widget>
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
      <x>30</x>
      <y>20</y>
-     <width>451</width>
-     <height>261</height>
+     <width>691</width>
+     <height>391</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="mapbox"/>
+  </widget>
+  <widget class="QFrame" name="frame">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>500</y>
+     <width>651</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Sunken</enum>
+   </property>
+   <widget class="QLabel" name="result">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>40</y>
+      <width>491</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>
