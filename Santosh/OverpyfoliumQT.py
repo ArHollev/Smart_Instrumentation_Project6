@@ -8,14 +8,14 @@ from PySide6 import QtWidgets, QtWebEngineWidgets
 import overpy
 
 api = overpy.Overpass()
-text = 'Circle'
+text = 'Circle of intrest ;°'
 radius = 500
 circle_lat = 51.0557409
 circle_lon = 3.7218855
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    amenity = api.query('way(around:' + str(radius) + ',' + str(circle_lat) + ',' + str(circle_lon) + ')["amenity"]; (._;>;); out geom;')
+    amenity = api.query('way(around:' + str(radius) + ',' + str(circle_lat) + ',' + str(circle_lon) + ')["amenity"="pharmacy"]; (._;>;); out geom;')
 
     m = folium.Map(location=[circle_lat, circle_lon], tiles="OpenStreetMap", zoom_start=15, min_zoom=8, max_zoom=25)
     folium.Circle([circle_lat, circle_lon], radius, fill=True).add_child(folium.Popup(text)).add_to(m)
@@ -31,9 +31,7 @@ if __name__ == "__main__":
     w.resize(640, 480)
     w.show()
 
-    #print aantal gevonden nodes
     print(len(amenity.nodes))
-    #als het niet leeg is wordt de eerste geprint
     if amenity.nodes:
         print(amenity.nodes[0])
 
