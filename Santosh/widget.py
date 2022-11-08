@@ -17,8 +17,11 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 Form, Base = loadUiType(os.path.join(current_dir, "form.ui"))
 
 
-def gebiedanalyse(breedte,lengte,straal):
-    #breedte, lengte, straal = 51.2232747408709, 2.980362630411266, 100  # ingeven breedte en lengte coordinaten
+def get_pos(lat, lng):
+    return lat, lng
+
+
+def gebiedanalyse(lbl, breedte, lengte, straal):
     result = ox.geometries_from_point((breedte, lengte), {"landuse": True},
                                       dist=(straal))  # command dat "landuse" gegevens ophaalt uit osm
 
@@ -52,9 +55,7 @@ def gebiedanalyse(breedte,lengte,straal):
 
     # printen van resultaat
     print("This area is a", grootste_gebied, "area")
-
-
-
+    lbl.setText("This area is a " + grootste_gebied + " area")
 
 
 class OCR(Base, Form):
@@ -74,7 +75,9 @@ class OCR(Base, Form):
         self.radius.setText(str(self.slider_radius.value()))
         self.slider_radius.valueChanged.connect(lambda: self.radius.setText(str(self.slider_radius.value())))
 
-        self.testbutton.clicked.connect(lambda: gebiedanalyse(float(self.longitude.text()),float(self.latitude.text()),self.slider_radius.value()))
+        self.testbutton.clicked.connect(
+            lambda: gebiedanalyse(self.result, float(self.longitude.text()), float(self.latitude.text()),
+                                  self.slider_radius.value()))
 
     def calculate(self):
         longitude = self.longitude.text()
@@ -93,7 +96,7 @@ class OCR(Base, Form):
 
         self.map(float(longitude), float(latitude), radius)
 
-    def testValue(self):
+    def analyse(self):
         self.longitude.setText("51.0557409")
         self.latitude.setText("3.7218855")
 
@@ -102,9 +105,6 @@ class OCR(Base, Form):
 
         folium.Circle([lon, lat], rad, fill=True).add_to(m)
 
-        folium.map.Marker([lon + 0.5, lat - 1.6], icon=DivIcon(icon_size=(150, 36), icon_anchor=(0, 0),
-                                                               html='<div style=""font-size: 24pt">%s</div>' % text, )).add_to(
-            m)
         m.add_child(folium.LatLngPopup())
 
         data = io.BytesIO()
@@ -122,4 +122,3 @@ if __name__ == "__main__":
     widget = OCR()
     widget.show()
     sys.exit(app.exec())
-
