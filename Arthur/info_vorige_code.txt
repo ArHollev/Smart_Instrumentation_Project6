@@ -1,0 +1,6 @@
+
+vooral gebruik python geopy library
+
+functions.py
+bulkdata.py
+datahandler.py
