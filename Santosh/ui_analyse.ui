@@ -49,7 +49,7 @@
      </widget>
     </item>
     <item row="5" column="1">
-     <widget class="QPushButton" name="testbutton">
+     <widget class="QPushButton" name="btn_analyse">
       <property name="text">
        <string>Gebied analyse</string>
       </property>
@@ -126,7 +126,7 @@
      <x>50</x>
      <y>500</y>
      <width>651</width>
-     <height>121</height>
+     <height>141</height>
     </rect>
    </property>
    <property name="frameShape">
@@ -139,9 +139,9 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>40</y>
-      <width>491</width>
-      <height>31</height>
+      <y>20</y>
+      <width>541</width>
+      <height>91</height>
      </rect>
     </property>
     <property name="autoFillBackground">

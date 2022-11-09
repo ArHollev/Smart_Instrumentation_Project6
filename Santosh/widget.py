@@ -6,28 +6,23 @@ from PySide6.QtWidgets import QApplication
 from PySide6.QtUiTools import loadUiType
 from PySide6.QtWebEngineWidgets import QWebEngineView
 import folium
-from folium.features import DivIcon
 import overpy
 import osmnx as ox
 
 api = overpy.Overpass()
-text = 'Circle'
-
 current_dir = os.path.dirname(os.path.abspath(__file__))
-Form, Base = loadUiType(os.path.join(current_dir, "form.ui"))
+Form, Base = loadUiType(os.path.join(current_dir, "ui_analyse.ui"))
 
 
-def get_pos(lat, lng):
-    return lat, lng
+def gebiedanalyse(breedte, lengte, straal, feature_key):
 
-
-def gebiedanalyse(lbl, breedte, lengte, straal):
-    result = ox.geometries_from_point((breedte, lengte), {"landuse": True},
-                                      dist=(straal))  # command dat "landuse" gegevens ophaalt uit osm
+    query = ox.geometries_from_point((breedte, lengte), {feature_key: True},dist=(straal))  # command dat "landuse" gegevens ophaalt uit osm
+    if query.empty:
+        return
 
     # maken van lijst voor gebiedsanalye
     f = list()  # maken van een lijst van alle areas "landuse"
-    x = result['landuse']
+    x = query[feature_key]
     for i in x:
         f.append(i)
 
@@ -37,17 +32,16 @@ def gebiedanalyse(lbl, breedte, lengte, straal):
             continue
         if i not in r:
             r.append(i)
-    print(f)
-    print(r)
+
+    # print(f)
+    # print(r)
 
     # berekenen van som van de oppervlakte van de gebiedstypes
     w = {}  # directory creeren
     for i in r:
-        tags = {'landuse': i}  # tags veranderen naar betrevende soort landuse waarvoor oppervlakte berekend moet worden
+        tags = { feature_key: i}  # tags veranderen naar betrevende soort landuse waarvoor oppervlakte berekend moet worden
         result = ox.geometries_from_point((breedte, lengte), tags, dist=100)
-
         result.crs = 'epsg:4328'  # assign correct CRS in the correct format here
-
         gebied = sum(result.area)  # berekenen van som van de oppervlakten
         w[i] = gebied
     grootste_gebied = max(w, key=w.get)  # geeft het grootse landuse oppervlakte
@@ -55,52 +49,55 @@ def gebiedanalyse(lbl, breedte, lengte, straal):
 
     # printen van resultaat
     print("This area is a", grootste_gebied, "area")
-    lbl.setText("This area is a " + grootste_gebied + " area")
+    #if grootste_gebied:
+    #lbl.setText("This area is a " + grootste_gebied + " area")
+
+    return grootste_gebied
 
 
 class OCR(Base, Form):
     def __init__(self, parent=None):
         super(self.__class__, self).__init__(parent)
         self.setupUi(self)
-        self.button.clicked.connect(self.calculate)
-
-        self.map(51.0557409, 3.7218855, 500)
+        self.update_map(51.0557409, 3.7218855, 200)
 
         self.longitude.setText("51.0557409")
         self.latitude.setText("3.7218855")
 
         self.slider_radius.setRange(10, 1000)
         self.slider_radius.setSingleStep(10)
-        self.slider_radius.setValue(500)
+        self.slider_radius.setValue(200)
         self.radius.setText(str(self.slider_radius.value()))
         self.slider_radius.valueChanged.connect(lambda: self.radius.setText(str(self.slider_radius.value())))
 
-        self.testbutton.clicked.connect(
-            lambda: gebiedanalyse(self.result, float(self.longitude.text()), float(self.latitude.text()),
-                                  self.slider_radius.value()))
+        self.btn_analyse.clicked.connect(self.analyse)
+
+        self.button.clicked.connect(self.calculate)
 
     def calculate(self):
+        key = 'natural'
         longitude = self.longitude.text()
         latitude = self.latitude.text()
         radius = str(self.slider_radius.value())
-        # if not longitude or not latitude or not radius:
-        print("longitude: " + longitude + " latitude: " + latitude + " radius: " + radius)
-        amenity = api.query(
-            'way(around:' + str(radius) + ',' + longitude + ',' + latitude + ')["amenity"="pub"]; (._;>;); out geom;')
+        myquery = api.query('way(around:' + str(radius) + ',' + longitude + ',' + latitude + ')[' + key + ']; (._;>;); out geom;')
 
-        self.result.setText("The number of amenities found in the selected area: Pubs =  " + str(len(amenity.nodes)))
-
-        print(len(amenity.nodes))
-        if amenity.nodes:
-            id = amenity.nodes[0].id
-
-        self.map(float(longitude), float(latitude), radius)
+        self.result.setText("The number of " + key + " found in the selected area: " + str(len(myquery.nodes)))
+        print(len(myquery.nodes))
+        self.update_map(float(longitude), float(latitude), radius)
 
     def analyse(self):
-        self.longitude.setText("51.0557409")
-        self.latitude.setText("3.7218855")
+        getlong = float(self.longitude.text())
+        getlat = float(self.latitude.text())
+        getrad = self.slider_radius.value()
+        self.update_map(getlong, getlat, getrad)
+        key = ["landuse", "natural", "water"]
+        self.result.setText("")
+        for i in key:
+            grootstegebied = gebiedanalyse(getlong, getlat, getrad, i)
+            if grootstegebied:
+                self.result.setText( "This area is a " + grootstegebied + " area" + "\n")
 
-    def map(self, lon, lat, rad):
+    def update_map(self, lon, lat, rad):
         m = folium.Map(location=[lon, lat], tiles="OpenStreetMap", zoom_start=14, min_zoom=8, max_zoom=25)
 
         folium.Circle([lon, lat], rad, fill=True).add_to(m)
