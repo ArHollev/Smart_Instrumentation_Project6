@@ -11,12 +11,13 @@ import osmnx as ox
 
 api = overpy.Overpass()
 current_dir = os.path.dirname(os.path.abspath(__file__))
-Form, Base = loadUiType(os.path.join(current_dir, "ui_analyse.ui"))
+Form, Base = loadUiType(
+    os.path.join(current_dir, "ui_analyse.ui"))  # layoutfile die met QTcreator gemaakt is wordt geladen
 
 
 def gebiedanalyse(breedte, lengte, straal, feature_key):
-
-    query = ox.geometries_from_point((breedte, lengte), {feature_key: True},dist=(straal))  # command dat "landuse" gegevens ophaalt uit osm
+    query = ox.geometries_from_point((breedte, lengte), {feature_key: True},
+                                     dist=(straal))  # command dat "landuse" gegevens ophaalt uit osm
     if query.empty:
         return
 
@@ -39,7 +40,8 @@ def gebiedanalyse(breedte, lengte, straal, feature_key):
     # berekenen van som van de oppervlakte van de gebiedstypes
     w = {}  # directory creeren
     for i in r:
-        tags = { feature_key: i}  # tags veranderen naar betrevende soort landuse waarvoor oppervlakte berekend moet worden
+        tags = {
+            feature_key: i}  # tags veranderen naar betrevende soort landuse waarvoor oppervlakte berekend moet worden
         result = ox.geometries_from_point((breedte, lengte), tags, dist=100)
         result.crs = 'epsg:4328'  # assign correct CRS in the correct format here
         gebied = sum(result.area)  # berekenen van som van de oppervlakten
@@ -49,8 +51,8 @@ def gebiedanalyse(breedte, lengte, straal, feature_key):
 
     # printen van resultaat
     print("This area is a", grootste_gebied, "area")
-    #if grootste_gebied:
-    #lbl.setText("This area is a " + grootste_gebied + " area")
+    # if grootste_gebied:
+    # lbl.setText("This area is a " + grootste_gebied + " area")
 
     return grootste_gebied
 
@@ -74,18 +76,22 @@ class OCR(Base, Form):
 
         self.button.clicked.connect(self.calculate)
 
+    # calculate bekijkt hoeveel nodes van bepaalde key (bijvoorbeeld amenity) in gegeven radius bevindt
     def calculate(self):
-        key = 'natural'
+        key = 'amenity'
         longitude = self.longitude.text()
         latitude = self.latitude.text()
         radius = str(self.slider_radius.value())
-        myquery = api.query('way(around:' + str(radius) + ',' + longitude + ',' + latitude + ')[' + key + ']; (._;>;); out geom;')
+        myquery = api.query(
+            'way(around:' + str(radius) + ',' + longitude + ',' + latitude + ')[' + key + ']; (._;>;); out geom;')
 
         self.result.setText("The number of " + key + " found in the selected area: " + str(len(myquery.nodes)))
         print(len(myquery.nodes))
         self.update_map(float(longitude), float(latitude), radius)
 
+    # analyse functie bekijkt wat de grootste landgebruik is binnen de ingegeven straal
     def analyse(self):
+        # ingegeven lon,lat en radius ophalen
         getlong = float(self.longitude.text())
         getlat = float(self.latitude.text())
         getrad = self.slider_radius.value()
@@ -95,11 +101,11 @@ class OCR(Base, Form):
         for i in key:
             grootstegebied = gebiedanalyse(getlong, getlat, getrad, i)
             if grootstegebied:
-                self.result.setText( "This area is a " + grootstegebied + " area" + "\n")
+                self.result.setText("This area is a " + grootstegebied + " area" + "\n")
 
+    # update_map zorgt ervoor dat elke keer query met nieuwe coordinaten uitgevoerd is, de map zich verstelt
     def update_map(self, lon, lat, rad):
         m = folium.Map(location=[lon, lat], tiles="OpenStreetMap", zoom_start=14, min_zoom=8, max_zoom=25)
-
         folium.Circle([lon, lat], rad, fill=True).add_to(m)
 
         m.add_child(folium.LatLngPopup())

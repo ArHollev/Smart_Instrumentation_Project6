@@ -2,10 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9a5f3fb9-ff2a-43ba-95b2-0b6393a79b32" name="Changes" comment="gebied analyse">
-      <change afterPath="$PROJECT_DIR$/Santosh/leaflet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santosh/form.ui" beforeDir="false" afterPath="$PROJECT_DIR$/Santosh/ui_analyse.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Santosh/lib_geopy.py" beforeDir="false" afterPath="$PROJECT_DIR$/Santosh/lib_geopy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santosh/OverpyfoliumQT.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santosh/layout.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santosh/lib.pyrosm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santosh/lib_OSMPyTools.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santosh/lib_folium.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santosh/lib_foliumQT.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santosh/lib_geopy.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santosh/lib_osmnx.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santosh/lib_overpy.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Santosh/qt.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Santosh/widget.py" beforeDir="false" afterPath="$PROJECT_DIR$/Santosh/widget.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -31,14 +42,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/Users/santoshsubedi/Documents/GitHub/Smart_Instrumentation_Project6/Santosh",
-    "settings.editor.selected.configurable": "actions.on.save"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/santoshsubedi/Documents/GitHub/Smart_Instrumentation_Project6/Santosh&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Santosh" />
@@ -153,7 +164,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.widget" />
-        <item itemvalue="Python.leaflet" />
         <item itemvalue="Python.lib_foliumQT" />
         <item itemvalue="Python.OverpyleafletQT" />
         <item itemvalue="Python.lib_geopy" />
@@ -246,7 +256,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667908648724</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="gebied analyse">
+      <created>1668010500268</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1668010500268</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
