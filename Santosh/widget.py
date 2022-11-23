@@ -5,6 +5,10 @@ import io
 from PySide6.QtWidgets import QApplication
 from PySide6.QtUiTools import loadUiType
 from PySide6.QtWebEngineWidgets import QWebEngineView
+from PySide6.QtCharts import QChart, QChartView, QPieSeries
+from PySide6.QtGui import QPainter,QPen
+from PySide6.QtCore import Qt
+
 import folium
 import overpy
 import osmnx as ox
@@ -12,7 +16,7 @@ import osmnx as ox
 api = overpy.Overpass()
 current_dir = os.path.dirname(os.path.abspath(__file__))
 Form, Base = loadUiType(
-    os.path.join(current_dir, "ui_analyse.ui"))  # layoutfile die met QTcreator gemaakt is wordt geladen
+    os.path.join(current_dir, "layout.ui"))  # layoutfile die met QTcreator gemaakt is wordt geladen
 
 
 def gebiedanalyse(breedte, lengte, straal, feature_key):
@@ -34,8 +38,8 @@ def gebiedanalyse(breedte, lengte, straal, feature_key):
         if i not in r:
             r.append(i)
 
-    # print(f)
-    # print(r)
+    print(f)
+    print(r)
 
     # berekenen van som van de oppervlakte van de gebiedstypes
     w = {}  # directory creeren
@@ -51,9 +55,6 @@ def gebiedanalyse(breedte, lengte, straal, feature_key):
 
     # printen van resultaat
     print("This area is a", grootste_gebied, "area")
-    # if grootste_gebied:
-    # lbl.setText("This area is a " + grootste_gebied + " area")
-
     return grootste_gebied
 
 
@@ -72,7 +73,8 @@ class OCR(Base, Form):
         self.radius.setText(str(self.slider_radius.value()))
         self.slider_radius.valueChanged.connect(lambda: self.radius.setText(str(self.slider_radius.value())))
 
-        self.btn_analyse.clicked.connect(self.analyse)
+        self.btn_analyse.clicked.connect(self.create_chart)
+
 
         self.button.clicked.connect(self.calculate)
 
@@ -96,12 +98,13 @@ class OCR(Base, Form):
         getlat = float(self.latitude.text())
         getrad = self.slider_radius.value()
         self.update_map(getlong, getlat, getrad)
-        key = ["landuse", "natural", "water"]
+        key = ["landuse"]
         self.result.setText("")
         for i in key:
             grootstegebied = gebiedanalyse(getlong, getlat, getrad, i)
             if grootstegebied:
                 self.result.setText("This area is a " + grootstegebied + " area" + "\n")
+
 
     # update_map zorgt ervoor dat elke keer query met nieuwe coordinaten uitgevoerd is, de map zich verstelt
     def update_map(self, lon, lat, rad):
@@ -118,6 +121,28 @@ class OCR(Base, Form):
         if layout.count():
             layout.takeAt(0)
         layout.addWidget(webview)
+
+    def create_chart(self):
+        self.series = QPieSeries()
+        label = ["a","b","c","d"]
+        value = [10,20,30,40]
+        for l,v in zip(label,value):
+            self.series.append(l,v)
+        self.chart = QChart()
+        self.chart.addSeries(self.series)
+        #chart.setAnimationOptions(QChart.SeriesAnimations)
+
+        self.view =  QChartView(self.chart)
+        self.view.setRenderHint(QPainter.Antialiasing)
+
+        layout = self.chartWid
+        if layout.count():
+            layout.takeAt(0)
+        layout.addWidget(self.view)
+
+
+
+
 
 
 if __name__ == "__main__":
