@@ -73,7 +73,7 @@ class OCR(Base, Form):
         self.radius.setText(str(self.slider_radius.value()))
         self.slider_radius.valueChanged.connect(lambda: self.radius.setText(str(self.slider_radius.value())))
 
-        self.btn_analyse.clicked.connect(self.create_chart)
+        self.btn_analyse.clicked.connect(self.analyse)
 
 
         self.button.clicked.connect(self.calculate)
