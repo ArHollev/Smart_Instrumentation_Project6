@@ -54,8 +54,7 @@ def gebiedanalyse(breedte, lengte, straal, feature_key):
     # berekenen van som van de oppervlakte van de gebiedstypes
     w = {}  # directory creeren
     for i in r:
-        tags = {
-            feature_key: i}  # tags veranderen naar betrevende soort landuse waarvoor oppervlakte berekend moet worden
+        tags = {feature_key: i}  # tags veranderen naar betrevende soort landuse waarvoor oppervlakte berekend moet worden
         result = ox.geometries_from_point((breedte, lengte), tags, dist=100)
         result.crs = 'epsg:4328'  # assign correct CRS in the correct format here
         gebied = sum(result.area)  # berekenen van som van de oppervlakten

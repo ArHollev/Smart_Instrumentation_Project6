@@ -35,8 +35,10 @@ def gebiedanalyse(breedte, lengte, straal, feature_key):
     if result.empty:
         return
 
+
     result['area'] = result.area
-    DataframeOppervlakte = result.dissolve(by='landuse')
+
+    DataframeOppervlakte = result.dissolve(by=feature_key, aggfunc={"area": "sum"})
     DataframeOppervlakte.head()
 
     w = DataframeOppervlakte.to_dict()
@@ -47,11 +49,11 @@ def gebiedanalyse(breedte, lengte, straal, feature_key):
     print(DictOppervlak)
     
     #maken van een lijst van de aanwezige landuse's
-    lijst = tuple(set(result['landuse'])) 
+    lijst = tuple(set(result['landuse']))
     print(lijst)
     
     #printen van resultaat
-    print("This area is a", grootste_gebied, "area")
+    #print("This area is a", grootste_gebied, "area")
        
     return grootste_gebied, DictOppervlak
 
@@ -275,14 +277,6 @@ def routeanalyse(lat_A, lon_A, lat_B, lon_B):
     ).add_to(map)
     return map
     
-    
-    
-    
-    
-    
-
-
-
 
 class OCR(Base, Form):
     def __init__(self, parent=None):
@@ -331,7 +325,7 @@ class OCR(Base, Form):
             return_g_ana = gebiedanalyse(getlong, getlat, getrad, i)
             if return_g_ana[0]:
                 self.tekst_result.setText("This area is a " + return_g_ana[0] + " area" + "\n")
-        self.create_chart(return_g_ana[1])
+        #self.create_chart(return_g_ana[1])
                 
     def r_analyse(self):
         getlongA = float(self.longitude_A.text())
